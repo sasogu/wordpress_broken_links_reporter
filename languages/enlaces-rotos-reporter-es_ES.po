@@ -1,0 +1,42 @@
+
+msgid "Report broken link"
+msgstr "Reportar enlace roto"
+
+msgid "Which link is broken?"
+msgstr "¿Qué enlace está roto?"
+
+msgid "Send report"
+msgstr "Enviar reporte"
+
+msgid "New broken link report"
+msgstr "Nuevo reporte de enlace roto"
+
+msgid "A broken link has been reported on the site:"
+msgstr "Se ha reportado un enlace roto en el sitio:"
+
+msgid "Post: %s (ID: %d)"
+msgstr "Entrada: %s (ID: %d)"
+
+msgid "Reported link: %s"
+msgstr "Enlace reportado: %s"
+
+msgid "Date: %s"
+msgstr "Fecha: %s"
+
+msgid "Report sent! Thank you for collaborating."
+msgstr "¡Reporte enviado! Gracias por colaborar."
+
+msgid "Broken Links Reports"
+msgstr "Reportes de Enlaces Rotos"
+
+msgid "Broken Links"
+msgstr "Enlaces Rotos"
+
+msgid "Post"
+msgstr "Entrada"
+
+msgid "Link"
+msgstr "Enlace"
+
+msgid "Date"
+msgstr "Fecha"

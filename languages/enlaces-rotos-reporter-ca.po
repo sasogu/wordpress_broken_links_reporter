@@ -1,0 +1,43 @@
+
+
+msgid "Report broken link"
+msgstr "Reporta un enllaç trencat"
+
+msgid "Which link is broken?"
+msgstr "Quin enllaç està trencat?"
+
+msgid "Send report"
+msgstr "Envia l'informe"
+
+msgid "New broken link report"
+msgstr "Nou informe d'enllaç trencat"
+
+msgid "A broken link has been reported on the site:"
+msgstr "S'ha reportat un enllaç trencat al lloc:"
+
+msgid "Post: %s (ID: %d)"
+msgstr "Entrada: %s (ID: %d)"
+
+msgid "Reported link: %s"
+msgstr "Enllaç reportat: %s"
+
+msgid "Date: %s"
+msgstr "Data: %s"
+
+msgid "Report sent! Thank you for collaborating."
+msgstr "Informe enviat! Gràcies per col·laborar."
+
+msgid "Broken Links Reports"
+msgstr "Informes d'enllaços trencats"
+
+msgid "Broken Links"
+msgstr "Enllaços trencats"
+
+msgid "Post"
+msgstr "Entrada"
+
+msgid "Link"
+msgstr "Enllaç"
+
+msgid "Date"
+msgstr "Data"

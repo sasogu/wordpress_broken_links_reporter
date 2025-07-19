@@ -1,0 +1,2 @@
+<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more detalles, visita https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
+Este proyecto es un plugin para WordPress que permite reportar enlaces rotos al final de cada entrada. El código debe seguir las buenas prácticas de desarrollo de plugins para WordPress.
