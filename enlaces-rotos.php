@@ -3,7 +3,7 @@
 /*
 Plugin Name: Enlaces Rotos Reporter
 Description: Permite a los usuarios reportar enlaces rotos al final de cada entrada.
-Version: 1.5
+Version: 0.0.1
 Author: Samuel Soriano
 Text Domain: enlaces-rotos-reporter
 */
@@ -58,8 +58,8 @@ function enlaces_rotos_agregar_boton($content) {
         #enlaces-rotos-form button { background: #388e3c; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
         </style>';
         $nonce = wp_create_nonce('enlaces_rotos_nonce');
-        $content .= '<div id="enlaces-rotos-reportar"><button onclick="document.getElementById(\'enlaces-rotos-form\').style.display=\'block\'">'.__('Report broken link', 'enlaces-rotos-reporter').'</button></div>';
-        $content .= '<div id="enlaces-rotos-form" style="display:none;"><form method="post"><input type="hidden" name="enlaces_rotos_post_id" value="'.get_the_ID().'" /><input type="hidden" name="enlaces_rotos_nonce" value="'.$nonce.'" /><label>'.__('Which link is broken?', 'enlaces-rotos-reporter').'</label><input type="text" name="enlace_roto" required /><button type="submit">'.__('Send report', 'enlaces-rotos-reporter').'</button></form></div>';
+        $content .= '<div id="enlaces-rotos-reportar"><button onclick="document.getElementById(\'enlaces-rotos-form\').style.display=\'block\'">'.esc_html(__('Report broken link', 'enlaces-rotos-reporter')).'</button></div>';
+        $content .= '<div id="enlaces-rotos-form" style="display:none;"><form method="post"><input type="hidden" name="enlaces_rotos_post_id" value="'.esc_attr(get_the_ID()).'" /><input type="hidden" name="enlaces_rotos_nonce" value="'.esc_attr($nonce).'" /><label>'.esc_html(__('Which link is broken?', 'enlaces-rotos-reporter')).'</label><input type="text" name="enlace_roto" required /><button type="submit">'.esc_html(__('Send report', 'enlaces-rotos-reporter')).'</button></form></div>';
     }
     return $content;
 }
@@ -68,6 +68,7 @@ function enlaces_rotos_agregar_boton($content) {
 add_action('init', 'enlaces_rotos_procesar_reporte');
 function enlaces_rotos_procesar_reporte() {
     if (
+        $_SERVER['REQUEST_METHOD'] === 'POST' &&
         isset($_POST['enlaces_rotos_post_id']) &&
         isset($_POST['enlace_roto']) &&
         isset($_POST['enlaces_rotos_nonce']) &&
@@ -148,7 +149,12 @@ function enlaces_rotos_admin_page() {
     echo '<table class="widefat" style="background:#fff; border-radius:6px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05);">';
     echo '<thead><tr style="background:#f44336; color:#fff;"><th>ID</th><th>'.__('Post', 'enlaces-rotos-reporter').'</th><th>'.__('Link', 'enlaces-rotos-reporter').'</th><th>'.__('Date', 'enlaces-rotos-reporter').'</th></tr></thead><tbody>';
     foreach ($reportes as $r) {
-        echo '<tr style="border-bottom:1px solid #eee;"><td>'.$r->id.'</td><td><a href="'.get_permalink($r->post_id).'" target="_blank">'.$r->post_id.'</a></td><td style="word-break:break-all;">'.$r->enlace.'</td><td>'.$r->fecha.'</td></tr>';
+        echo '<tr style="border-bottom:1px solid #eee;">'
+            .'<td>'.esc_html($r->id).'</td>'
+            .'<td><a href="'.esc_url(get_permalink($r->post_id)).'" target="_blank">'.esc_html($r->post_id).'</a></td>'
+            .'<td style="word-break:break-all;">'.esc_html($r->enlace).'</td>'
+            .'<td>'.esc_html($r->fecha).'</td>'
+            .'</tr>';
     }
     echo '</tbody></table>';
     // Paginación
