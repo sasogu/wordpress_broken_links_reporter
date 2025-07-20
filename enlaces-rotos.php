@@ -59,7 +59,7 @@ function enlaces_rotos_agregar_boton($content) {
         </style>';
         $nonce = wp_create_nonce('enlaces_rotos_nonce');
         $content .= '<div id="enlaces-rotos-reportar"><button onclick="document.getElementById(\'enlaces-rotos-form\').style.display=\'block\'">'.esc_html(__('Report broken link', 'enlaces-rotos-reporter')).'</button></div>';
-        $content .= '<div id="enlaces-rotos-form" style="display:none;"><form method="post"><input type="hidden" name="enlaces_rotos_post_id" value="'.esc_attr(get_the_ID()).'" /><input type="hidden" name="enlaces_rotos_nonce" value="'.esc_attr($nonce).'" /><label>'.esc_html(__('Which link is broken?', 'enlaces-rotos-reporter')).'</label><input type="text" name="enlace_roto" required /><button type="submit">'.esc_html(__('Send report', 'enlaces-rotos-reporter')).'</button></form></div>';
+        $content .= '<div id="enlaces-rotos-form" style="display:none;"><form method="post"><input type="hidden" name="enlaces_rotos_post_id" value="'.esc_attr(get_the_ID()).'" /><input type="hidden" name="enlaces_rotos_nonce" value="'.esc_attr($nonce).'" /><label>'.esc_html(__('Which link is broken?', 'enlaces-rotos-reporter')).'</label><input type="text" name="enlace_roto" required maxlength="255" /><button type="submit">'.esc_html(__('Send report', 'enlaces-rotos-reporter')).'</button></form></div>';
     }
     return $content;
 }
@@ -91,7 +91,7 @@ function enlaces_rotos_procesar_reporte() {
         $message .= sprintf(__('Post: %s (ID: %d)', 'enlaces-rotos-reporter'), $post_url, $post_id)."\n";
         $message .= sprintf(__('Reported link: %s', 'enlaces-rotos-reporter'), $enlace)."\n";
         $message .= sprintf(__('Date: %s', 'enlaces-rotos-reporter'), current_time('mysql'))."\n";
-        @wp_mail($admin_email, $subject, $message);
+        wp_mail($admin_email, $subject, $message);
         // Mensaje de confirmación (puedes mejorar esto con JS)
         add_action('wp_footer', function() {
             echo '<script>alert("'.esc_js(__('Report sent! Thank you for collaborating.', 'enlaces-rotos-reporter')).'");</script>';
@@ -137,6 +137,9 @@ function enlaces_rotos_admin_menu() {
     add_menu_page(__('Broken Links Reports', 'enlaces-rotos-reporter'), __('Broken Links', 'enlaces-rotos-reporter'), 'manage_options', 'enlaces-rotos', 'enlaces_rotos_admin_page');
 }
 function enlaces_rotos_admin_page() {
+    if ( ! current_user_can('manage_options') ) {
+        wp_die(__('You do not have sufficient permissions to access this page.'));
+    }
     global $wpdb;
     $table = $wpdb->prefix . 'enlaces_rotos_reportes';
     $por_pagina = 20;
